@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3tg7su5aydly"]
+
+[ext_resource type="Shader" uid="uid://bymdqfl70lwp2" path="res://grid.gdshader" id="1_a433f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84v8o"]
+render_priority = 0
+shader = ExtResource("1_a433f")
+shader_parameter/resolution = Vector2(600, 400)
+shader_parameter/line_color = Color(0.2, 0.3, 0.5, 1)
+shader_parameter/zoom = 0.0
+shader_parameter/thickness = 2.0
+shader_parameter/brightness = 1.0
+
+[node name="Grid" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_84v8o")
+offset_right = 600.0
+offset_bottom = 400.0
