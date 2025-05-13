@@ -12,7 +12,14 @@ extends MeshInstance3D
 @export var grid_scale: float = 1.0
 @export var noise_strength: float = 10
 
+@export var set_mouse_position:bool
+var mouse_position : Vector2
+
 func generate_mesh() -> void:
+	for child in get_children():
+		self.remove_child(child)
+		child.queue_free()
+
 	noise.seed = randi()
 
 	var st := SurfaceTool.new()
@@ -42,8 +49,6 @@ func generate_mesh() -> void:
 
 			indicies.append_array([i,i_right,i_down,i_right,
 									i_down_right,i_down])
-			
-			
 
 	var arr_mesh = ArrayMesh.new()
 	var arrays = []
@@ -58,6 +63,14 @@ func generate_mesh() -> void:
 	self.mesh = arr_mesh
 	self.mesh.surface_set_material(0,surface_material)
 
+	var static_body:StaticBody3D = StaticBody3D.new()
+	var collision_shape:CollisionShape3D = CollisionShape3D.new()
+	var shape:ConcavePolygonShape3D = self.mesh.create_trimesh_shape()
+
+	collision_shape.shape = shape
+	static_body.add_child(collision_shape)
+	add_child(static_body)
+
 func calculate_normal(x: float, z: float, scale: float, noise: FastNoiseLite, strength: float) -> Vector3:
 	var h_l = noise.get_noise_2d((x - 1) * scale, z * scale) * strength # left
 	var h_r = noise.get_noise_2d((x + 1) * scale, z * scale) * strength # right
@@ -68,4 +81,54 @@ func calculate_normal(x: float, z: float, scale: float, noise: FastNoiseLite, st
 	var dx = h_l - h_r
 	var dz = h_d - h_u
 	var normal = Vector3(dx, 2.0, dz).normalized() # y scale exaggerates height contrast
+
+
 	return normal
+func _input(event: InputEvent) -> void:
+	handle_mouse_click(event)
+
+func handle_mouse_click(event:InputEvent) -> void:
+	if event is not InputEventMouseButton:
+		return
+	if event.pressed == false and event.button_index == MOUSE_BUTTON_LEFT:
+		mouse_position = event.position
+	#The physics state of the world
+	var space = get_world_3d().direct_space_state
+	#start and end world positions for the ray
+	var start = get_viewport().get_camera_3d().project_ray_origin(mouse_position)
+	var end = get_viewport().get_camera_3d().project_position(mouse_position,1000)
+	#Params for 3D raycast
+	#Alt var params = PhysicsRayQueryParameters3D.create(start,end)
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = start
+	params.to = end
+	#cast the ray using the space and return the results as a Dictionary
+	var result:Dictionary = space.intersect_ray(params)
+	if result.is_empty() == false:
+		print(result.position)
+
+
+func _process(_delta: float) -> void:
+	return
+	var mouse_pos = get_viewport().get_mouse_position()
+	var from = get_viewport().get_camera_3d().project_ray_origin(mouse_pos)
+	var to = get_viewport().get_camera_3d().project_position(mouse_pos,1000)
+
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = from
+	params.to = to
+	var space_state = get_world_3d().direct_space_state
+	var result = space_state.intersect_ray(params)
+	
+	if result and result.has("position"):
+		print(result.position)
+		# var local_pos = to_local(result.position)
+
+		# # Convert world position to UV-like 0..1 range
+		# var uv_x = local_pos.x / (mesh.size.x if mesh and mesh.has("size") else 1.0)
+		# var uv_y = local_pos.z / (mesh.size.z if mesh and mesh.has("size") else 1.0)
+
+		# var grid_x = floor(uv_x * zoom)
+		# var grid_y = floor(uv_y * zoom)
+
+		# shader_material.set_shader_parameter("highlight_square", Vector2(grid_x, grid_y))
