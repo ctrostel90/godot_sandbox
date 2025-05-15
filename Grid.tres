@@ -5,6 +5,8 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_qs48l")
+shader_parameter/highlight = Vector2(15, 10)
+shader_parameter/highlight_color = Color(0, 1, 0, 1)
 shader_parameter/resolution = Vector2(600, 400)
 shader_parameter/line_color = Color(0.2, 0.3, 0.5, 1)
 shader_parameter/zoom = 20.0

@@ -70,6 +70,8 @@ func generate_mesh() -> void:
 	collision_shape.shape = shape
 	static_body.add_child(collision_shape)
 	add_child(static_body)
+	collision_shape.owner = get_tree().edited_scene_root
+	static_body.owner = get_tree().edited_scene_root
 
 func calculate_normal(x: float, z: float, scale: float, noise: FastNoiseLite, strength: float) -> Vector3:
 	var h_l = noise.get_noise_2d((x - 1) * scale, z * scale) * strength # left
@@ -81,9 +83,9 @@ func calculate_normal(x: float, z: float, scale: float, noise: FastNoiseLite, st
 	var dx = h_l - h_r
 	var dz = h_d - h_u
 	var normal = Vector3(dx, 2.0, dz).normalized() # y scale exaggerates height contrast
-
-
 	return normal
+	
+
 func _input(event: InputEvent) -> void:
 	handle_mouse_click(event)
 
@@ -105,30 +107,12 @@ func handle_mouse_click(event:InputEvent) -> void:
 	#cast the ray using the space and return the results as a Dictionary
 	var result:Dictionary = space.intersect_ray(params)
 	if result.is_empty() == false:
-		print(result.position)
-
-
-func _process(_delta: float) -> void:
-	return
-	var mouse_pos = get_viewport().get_mouse_position()
-	var from = get_viewport().get_camera_3d().project_ray_origin(mouse_pos)
-	var to = get_viewport().get_camera_3d().project_position(mouse_pos,1000)
-
-	var params = PhysicsRayQueryParameters3D.new()
-	params.from = from
-	params.to = to
-	var space_state = get_world_3d().direct_space_state
-	var result = space_state.intersect_ray(params)
-	
-	if result and result.has("position"):
-		print(result.position)
-		# var local_pos = to_local(result.position)
-
-		# # Convert world position to UV-like 0..1 range
-		# var uv_x = local_pos.x / (mesh.size.x if mesh and mesh.has("size") else 1.0)
-		# var uv_y = local_pos.z / (mesh.size.z if mesh and mesh.has("size") else 1.0)
-
-		# var grid_x = floor(uv_x * zoom)
-		# var grid_y = floor(uv_y * zoom)
+		var local_pos = to_local(result.position)
+		print(local_pos)
+		#var grid_x = floor(uv_x * zoom)
+		#var grid_y = floor(uv_y * zoom)
 
 		# shader_material.set_shader_parameter("highlight_square", Vector2(grid_x, grid_y))
+
+func _on_button_pressed() -> void:
+	generate_mesh()

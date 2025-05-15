@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b1csvis15h6di"]
+
+[ext_resource type="Shader" uid="uid://bo13m0xr2rvl2" path="res://visualgrid.tres" id="1_ggx5p"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ggx5p")
