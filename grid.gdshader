@@ -17,13 +17,19 @@ float draw_grid (vec2 uv){
 void fragment() {
 	vec2 uv = UV - 0.5;
 	uv.x *= resolution.x / resolution.y;
+
+	vec2 grid_coord = floor((uv + 0.5) * zoom); // which grid square we're in
+	vec2 highlight_coord = highlight;
+
 	float line_thickness = zoom * thickness / resolution.y;
-	vec3 color = smoothstep(1.0 - line_thickness,1,draw_grid(uv * zoom)) * line_color;
-	ALBEDO = color * brightness;
-	//1 / zoom = # of grid squares
-	vec2 grid_coord = floor(UV * zoom);
-	bool is_highlight = all(equal(grid_coord,highlight));
-	if (is_highlight){
-		ALBEDO = highlight_color;
+
+	// Draw grid color
+	vec3 color = smoothstep(1.0 - line_thickness, 1.0, draw_grid(uv * zoom)) * line_color;
+
+	// If we're in the highlighted grid cell, override with highlight_color
+	if (grid_coord == highlight_coord) {
+		color = highlight_color;
 	}
+
+	ALBEDO = color * brightness;
 }
