@@ -86,33 +86,11 @@ func calculate_normal(x: float, z: float, scale: float, noise: FastNoiseLite, st
 	return normal
 	
 
-func _input(event: InputEvent) -> void:
-	handle_mouse_click(event)
-
-func handle_mouse_click(event:InputEvent) -> void:
-	if event is not InputEventMouseButton:
-		return
-	if event.pressed == false and event.button_index == MOUSE_BUTTON_LEFT:
-		mouse_position = event.position
-	#The physics state of the world
-	var space = get_world_3d().direct_space_state
-	#start and end world positions for the ray
-	var start = get_viewport().get_camera_3d().project_ray_origin(mouse_position)
-	var end = get_viewport().get_camera_3d().project_position(mouse_position,1000)
-	#Params for 3D raycast
-	#Alt var params = PhysicsRayQueryParameters3D.create(start,end)
-	var params = PhysicsRayQueryParameters3D.new()
-	params.from = start
-	params.to = end
-	#cast the ray using the space and return the results as a Dictionary
-	var result:Dictionary = space.intersect_ray(params)
-	if result.is_empty() == false:
-		var local_pos = to_local(result.position)
-		print(local_pos)
-		#var grid_x = floor(uv_x * zoom)
-		#var grid_y = floor(uv_y * zoom)
-
-		# shader_material.set_shader_parameter("highlight_square", Vector2(grid_x, grid_y))
-
 func _on_button_pressed() -> void:
 	generate_mesh()
+
+
+func _on_static_body_3d_38734_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	 # Need to use the correct aspect ratio. I'm not converting right
+	var gridPos = Vector2i((event_position.x / 3),(event_position.z / 4.5))
+	surface_material.set_shader_parameter("highlight", gridPos)

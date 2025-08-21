@@ -87,7 +87,7 @@ noise_strength = 15.0
 shape = SubResource("ConcavePolygonShape3D_wc5p8")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.108823, 0.951008, -0.289381, 0.110707, 0.300893, 0.94721, 0.987878, 0.0710419, -0.138027, 1.56125, 23.3518, 13.4553)
+transform = Transform3D(-0.108604, 0.950836, -0.290028, 0.111151, 0.30154, 0.946953, 0.987852, 0.0706058, -0.138434, 1.56125, 23.3518, 13.4553)
 projection = 1
 fov = 55.8
 size = 26.757

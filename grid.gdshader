@@ -20,6 +20,7 @@ void fragment() {
 
 	vec2 grid_coord = floor((uv + 0.5) * zoom); // which grid square we're in
 	vec2 highlight_coord = highlight;
+	highlight_coord.x -= 5.0;//idk why, probably because of the zoom multiplication thing
 
 	float line_thickness = zoom * thickness / resolution.y;
 
