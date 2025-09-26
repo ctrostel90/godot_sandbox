@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InteractionToolUI" load_steps=2 format=3 uid="uid://v6f0yq7p4dv1"]
+
+[ext_resource type="Script" uid="uid://cihpooqugukmj" path="res://2.0/UI/resources/InteractionToolUI.gd" id="1_gvewj"]
+
+[resource]
+script = ExtResource("1_gvewj")
+Name = "Tree Planter"
+ToolType = 1
+metadata/_custom_type_script = "uid://cihpooqugukmj"

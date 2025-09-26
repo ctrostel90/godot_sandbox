@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InteractionToolUI" load_steps=2 format=3 uid="uid://cor32glpocijj"]
+
+[ext_resource type="Script" uid="uid://cihpooqugukmj" path="res://2.0/UI/resources/InteractionToolUI.gd" id="1_fb6rv"]
+
+[resource]
+script = ExtResource("1_fb6rv")
+Name = "Water Hose"
+ToolType = 2
+metadata/_custom_type_script = "uid://cihpooqugukmj"

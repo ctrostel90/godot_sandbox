@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhq15nnck1sob"]
+
+[ext_resource type="Script" uid="uid://vv8pnbqx774o" path="res://2.0/UI/scripts/tool_selector_ui.gd" id="1_yua27"]
+[ext_resource type="Script" uid="uid://cihpooqugukmj" path="res://2.0/UI/resources/InteractionToolUI.gd" id="2_svmr1"]
+[ext_resource type="ButtonGroup" uid="uid://d0ym3kvfbh4kh" path="res://2.0/UI/tool_button_group.tres" id="2_wx8wv"]
+[ext_resource type="Resource" uid="uid://v6f0yq7p4dv1" path="res://2.0/UI/resources/tree_planter.tres" id="3_itu42"]
+[ext_resource type="Resource" uid="uid://cor32glpocijj" path="res://2.0/UI/resources/water_hose.tres" id="4_dgt8j"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="ToolSelector" type="VBoxContainer" parent="."]
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 52.0
+offset_bottom = 53.0
+script = ExtResource("1_yua27")
+Tools = Array[ExtResource("2_svmr1")]([ExtResource("3_itu42"), ExtResource("4_dgt8j")])
+ToolButtonGroup = ExtResource("2_wx8wv")

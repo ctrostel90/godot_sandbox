@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://dx5x3fst0ae7l"]
+
+[ext_resource type="Script" uid="uid://c0b3fyhvv6otr" path="res://2.0/Scenes/world_generator.gd" id="1_7hbi4"]
+[ext_resource type="Resource" uid="uid://b7s0n873e4tk" path="res://2.0/Resources/GenerationSettings/DefaultGenerationSettings.tres" id="2_pvuy8"]
+[ext_resource type="Script" uid="uid://bgd4act8njt5b" path="res://2.0/World_Gen/camera_script.gd" id="3_5f6wt"]
+[ext_resource type="Script" uid="uid://hfykupbeccpa" path="res://2.0/Scenes/interaction_controller.gd" id="3_8j4u8"]
+[ext_resource type="Script" uid="uid://u3vwkjn4g5cr" path="res://2.0/Scenes/tree_controller.gd" id="3_u5c5d"]
+[ext_resource type="PackedScene" uid="uid://ln831ugsv6vq" path="res://2.0/Objects/tree.tscn" id="4_fkjdr"]
+[ext_resource type="PackedScene" uid="uid://bhq15nnck1sob" path="res://2.0/UI/ui.tscn" id="7_kg4ey"]
+
+[sub_resource type="Environment" id="Environment_hqr0r"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7hbi4"]
+
+[node name="World" type="Node3D"]
+
+[node name="Controllers" type="Node" parent="."]
+
+[node name="WorldGenerator" type="Node" parent="Controllers" node_paths=PackedStringArray("tile_parent")]
+script = ExtResource("1_7hbi4")
+settings = ExtResource("2_pvuy8")
+tile_parent = NodePath("../../Scene/TileParent")
+
+[node name="TreeController" type="Node" parent="Controllers"]
+script = ExtResource("3_u5c5d")
+TreeScene = ExtResource("4_fkjdr")
+
+[node name="InteractionController" type="Node3D" parent="Controllers" node_paths=PackedStringArray("main_camera", "InteractionTools")]
+script = ExtResource("3_8j4u8")
+main_camera = NodePath("../../CameraParent/Camera3D")
+tree_scene = ExtResource("4_fkjdr")
+InteractionTools = [null, null]
+
+[node name="CameraParent" type="Node3D" parent="."]
+transform = Transform3D(-0.694658, 0, -0.71934, 0, 1, 0, 0.71934, 0, -0.694658, 0, 0, 1)
+
+[node name="Camera3D" type="Camera3D" parent="CameraParent" node_paths=PackedStringArray("sun")]
+transform = Transform3D(1, 0, 0, 0, 0.673013, 0.739631, 0, -0.739631, 0.673013, 0, 18.5, 0)
+script = ExtResource("3_5f6wt")
+movespeed = 9
+sun = NodePath("../../Scene/DirectionalLight3D")
+
+[node name="Scene" type="Node3D" parent="."]
+
+[node name="TileParent" type="Node3D" parent="Scene"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Scene"]
+environment = SubResource("Environment_hqr0r")
+camera_attributes = SubResource("CameraAttributesPractical_7hbi4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scene"]
+transform = Transform3D(-0.414693, 0.902786, -0.114048, 0, 0.125333, 0.992115, 0.909961, 0.411423, -0.0519748, 0, 2, 0)
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="UI" parent="." instance=ExtResource("7_kg4ey")]

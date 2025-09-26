@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TileMeshData" load_steps=3 format=3 uid="uid://d0mmwalk11mhy"]
+
+[ext_resource type="PackedScene" uid="uid://cw7cs83n4s4kr" path="res://2.0/Resources/Tiles/default_tile.tscn" id="1_r3c4m"]
+[ext_resource type="Script" uid="uid://cu0umtw8fs255" path="res://2.0/World_Gen/tile_mesh_data.gd" id="2_q6bjc"]
+
+[resource]
+script = ExtResource("2_q6bjc")
+mesh = ExtResource("1_r3c4m")
+color = Color(0.248819, 0.245728, 0.890175, 1)
+metadata/_custom_type_script = "uid://cu0umtw8fs255"

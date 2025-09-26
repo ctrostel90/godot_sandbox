@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GenerationSettings" load_steps=6 format=3 uid="uid://b7s0n873e4tk"]
+
+[ext_resource type="Script" uid="uid://bmdkwkypfsrb1" path="res://2.0/World_Gen/generation_settings.gd" id="1_6878q"]
+[ext_resource type="Script" uid="uid://cu0umtw8fs255" path="res://2.0/World_Gen/tile_mesh_data.gd" id="1_errhy"]
+[ext_resource type="Resource" uid="uid://b6dos6gl6m53f" path="res://2.0/Resources/Tiles/ground.tres" id="2_xsht7"]
+[ext_resource type="Resource" uid="uid://d0mmwalk11mhy" path="res://2.0/Resources/Tiles/water.tres" id="3_uvupo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ogu1u"]
+fractal_gain = 0.8
+
+[resource]
+script = ExtResource("1_6878q")
+tile_size = Vector3(1, 1, 1)
+Tiles = Array[ExtResource("1_errhy")]([ExtResource("2_xsht7"), ExtResource("3_uvupo")])
+map_seed = 0
+heightmap_noise = SubResource("FastNoiseLite_ogu1u")
+map_size = Vector2i(50, 50)
+metadata/_custom_type_script = "uid://bmdkwkypfsrb1"

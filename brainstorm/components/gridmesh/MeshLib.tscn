@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq5hlcgeaskjl"]
+
+[ext_resource type="Material" uid="uid://d1554jmr16ofd" path="res://brainstorm/components/gridmesh/HighlightShader.tres" id="1_h7g3n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kr13l"]
+material = ExtResource("1_h7g3n")
+size = Vector3(0.9, 0.25, 0.9)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_h7g3n"]
+data = PackedVector3Array(-0.45, 0.125, 0.45, 0.45, 0.125, 0.45, -0.45, -0.125, 0.45, 0.45, 0.125, 0.45, 0.45, -0.125, 0.45, -0.45, -0.125, 0.45, 0.45, 0.125, -0.45, -0.45, 0.125, -0.45, 0.45, -0.125, -0.45, -0.45, 0.125, -0.45, -0.45, -0.125, -0.45, 0.45, -0.125, -0.45, 0.45, 0.125, 0.45, 0.45, 0.125, -0.45, 0.45, -0.125, 0.45, 0.45, 0.125, -0.45, 0.45, -0.125, -0.45, 0.45, -0.125, 0.45, -0.45, 0.125, -0.45, -0.45, 0.125, 0.45, -0.45, -0.125, -0.45, -0.45, 0.125, 0.45, -0.45, -0.125, 0.45, -0.45, -0.125, -0.45, 0.45, 0.125, 0.45, -0.45, 0.125, 0.45, 0.45, 0.125, -0.45, -0.45, 0.125, 0.45, -0.45, 0.125, -0.45, 0.45, 0.125, -0.45, -0.45, -0.125, 0.45, 0.45, -0.125, 0.45, -0.45, -0.125, -0.45, 0.45, -0.125, 0.45, 0.45, -0.125, -0.45, -0.45, -0.125, -0.45)
+
+[node name="MeshLib" type="Node3D"]
+
+[node name="BaseFlat" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_kr13l")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BaseFlat"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseFlat/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_h7g3n")
