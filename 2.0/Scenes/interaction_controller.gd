@@ -5,7 +5,9 @@ extends Node3D
 var selected_tile : Node3D
 
 @export var tree_scene : PackedScene
-@export var InteractionTools:Array[InteractionTool] = []
+@export var Tools : Array[InteractionTool] = []
+
+var _current_tool :InteractionTool
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -18,7 +20,7 @@ func _input(event: InputEvent) -> void:
 			return
 		if Input.is_action_just_pressed("Click") and event.pressed:
 			var tile = hit_object.get_parent()
-			tile.SpawnTree(tree_scene)
+			_current_tool.interact_on_tile(tile)
 			print("LeftClicked")
 		elif Input.is_action_just_pressed("RightClick"):
 			print("RightClicked")
@@ -31,3 +33,6 @@ func raycast_at_mouse(origin, end) -> Node3D:
 			return hit
 		else:
 			return null
+
+func _on_ui_tool_changed(NewTool: InteractionToolUI) -> void:
+	_current_tool = Tools[NewTool.ToolType - 1]

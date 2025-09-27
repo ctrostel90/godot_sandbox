@@ -1,4 +1,4 @@
-class_name InteractionTool extends Node
+class_name InteractionTool extends Resource
 
 @export var ToolType:GlobalTypes.InteractionToolType = GlobalTypes.InteractionToolType.NoTool
 
