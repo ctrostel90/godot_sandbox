@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MoistureSettings" load_steps=2 format=3 uid="uid://cw2lbt0fq7sw"]
+
+[ext_resource type="Script" uid="uid://b5qoyop4w02mj" path="res://2.0/Resources/Controllers/moisture_settings.gd" id="1_gfhxp"]
+
+[resource]
+script = ExtResource("1_gfhxp")
+update_rate = 1.0
+evaporation_rate = 5.0
+bleed_rate = 5.0
+metadata/_custom_type_script = "uid://b5qoyop4w02mj"

@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bqp6j0ebm0t3g"]
+
+[ext_resource type="Shader" uid="uid://8qsmjhakqxlx" path="res://2.0/Resources/Tiles/shaders/default_tile.gdshader" id="1_fwj86"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_fwj86")
+shader_parameter/moisture_level = 1.0
+shader_parameter/dry_color = Color(0.733333, 0.368627, 0.027451, 1)
+shader_parameter/wet_color = Color(0, 1, 0, 1)

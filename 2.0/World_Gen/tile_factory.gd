@@ -38,7 +38,7 @@ func init_tile(tile : Tile, position : PositionData):
 
 	# Set up material override
 	var mesh_instance: MeshInstance3D = tile.get_child(0) as MeshInstance3D
-	mesh_instance.material_override = tile_materials[tile.mesh_data.index]
+	mesh_instance.material_override = tile_materials[tile.mesh_data.index].duplicate()
 	
 	tile.position = position.world_position
 	tile_parent.add_child(tile)
@@ -52,6 +52,7 @@ func instantiate_tile(tile_type:int) -> Tile:
 	var biome = data.mesh
 	var t = biome.instantiate()
 	t.set_script(TILE_CLASS)
+	t.moisture_level = 100
 	t.mesh_data = data
 	t.mesh_data.index = tile_type
 	

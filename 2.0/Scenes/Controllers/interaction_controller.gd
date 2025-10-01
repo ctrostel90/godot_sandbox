@@ -21,7 +21,6 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("Click") and event.pressed:
 			var tile = hit_object.get_parent()
 			_current_tool.interact_on_tile(tile)
-			print("LeftClicked")
 		elif Input.is_action_just_pressed("RightClick"):
 			print("RightClicked")
 

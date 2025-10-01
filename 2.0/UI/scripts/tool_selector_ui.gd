@@ -25,6 +25,7 @@ func _ready() -> void:
 			tool_option.button_pressed = true
 			tool_option.emit_signal('pressed')
 
+
 func _tool_selected(Tool : InteractionToolUI) -> void:
 	if _selectedTool != Tool:
 		_selectedTool = Tool

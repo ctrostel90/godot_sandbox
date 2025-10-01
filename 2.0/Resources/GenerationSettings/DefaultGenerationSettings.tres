@@ -9,6 +9,7 @@
 fractal_gain = 0.8
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_6878q")
 tile_size = Vector3(1, 1, 1)
 Tiles = Array[ExtResource("1_errhy")]([ExtResource("2_xsht7"), ExtResource("3_uvupo")])

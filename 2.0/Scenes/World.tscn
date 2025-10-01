@@ -1,23 +1,26 @@
-[gd_scene load_steps=14 format=3 uid="uid://dx5x3fst0ae7l"]
+[gd_scene load_steps=17 format=3 uid="uid://dx5x3fst0ae7l"]
 
 [ext_resource type="Script" uid="uid://c0b3fyhvv6otr" path="res://2.0/Scenes/world_generator.gd" id="1_7hbi4"]
 [ext_resource type="Resource" uid="uid://b7s0n873e4tk" path="res://2.0/Resources/GenerationSettings/DefaultGenerationSettings.tres" id="2_pvuy8"]
 [ext_resource type="Script" uid="uid://bgd4act8njt5b" path="res://2.0/World_Gen/camera_script.gd" id="3_5f6wt"]
-[ext_resource type="Script" uid="uid://hfykupbeccpa" path="res://2.0/Scenes/interaction_controller.gd" id="3_8j4u8"]
-[ext_resource type="Script" uid="uid://u3vwkjn4g5cr" path="res://2.0/Scenes/tree_controller.gd" id="3_u5c5d"]
+[ext_resource type="Script" uid="uid://hfykupbeccpa" path="res://2.0/Scenes/Controllers/interaction_controller.gd" id="3_8j4u8"]
+[ext_resource type="Script" uid="uid://u3vwkjn4g5cr" path="res://2.0/Scenes/Controllers/tree_controller.gd" id="3_u5c5d"]
 [ext_resource type="PackedScene" uid="uid://ln831ugsv6vq" path="res://2.0/Objects/tree.tscn" id="4_fkjdr"]
-[ext_resource type="Script" uid="uid://d1n2c7i7m5c3t" path="res://2.0/InteractionTools/tree_planter.gd" id="7_3unv5"]
+[ext_resource type="Script" uid="uid://bixtdfmxnka2e" path="res://2.0/InteractionTools/interaction_tool.gd" id="6_t2mo5"]
+[ext_resource type="Script" uid="uid://d1n2c7i7m5c3t" path="res://2.0/InteractionTools/tree_planter.gd" id="7_dixca"]
 [ext_resource type="PackedScene" uid="uid://bhq15nnck1sob" path="res://2.0/UI/ui.tscn" id="7_kg4ey"]
-[ext_resource type="Script" uid="uid://d27blxn3mqerh" path="res://2.0/InteractionTools/water_hose.gd" id="8_0h43g"]
+[ext_resource type="Script" uid="uid://d27blxn3mqerh" path="res://2.0/InteractionTools/water_hose.gd" id="8_3unv5"]
+[ext_resource type="Script" uid="uid://g7kq51qkotr7" path="res://2.0/Scenes/Controllers/moisture_controller.gd" id="9_0h43g"]
+[ext_resource type="Resource" uid="uid://cw2lbt0fq7sw" path="res://2.0/Resources/Controllers/default_moisture_settings.tres" id="10_orlig"]
 
-[sub_resource type="Resource" id="Resource_orlig"]
-script = ExtResource("7_3unv5")
-ToolType = 1
+[sub_resource type="Resource" id="Resource_0h43g"]
+script = ExtResource("7_dixca")
+ToolType = 0
 metadata/_custom_type_script = "uid://d1n2c7i7m5c3t"
 
-[sub_resource type="Resource" id="Resource_v8c0r"]
-script = ExtResource("8_0h43g")
-ToolType = 2
+[sub_resource type="Resource" id="Resource_orlig"]
+script = ExtResource("8_3unv5")
+ToolType = 0
 metadata/_custom_type_script = "uid://d27blxn3mqerh"
 
 [sub_resource type="Environment" id="Environment_hqr0r"]
@@ -37,11 +40,16 @@ tile_parent = NodePath("../../Scene/TileParent")
 script = ExtResource("3_u5c5d")
 TreeScene = ExtResource("4_fkjdr")
 
-[node name="InteractionController" type="Node3D" parent="Controllers" node_paths=PackedStringArray("main_camera", "Tools")]
+[node name="InteractionController" type="Node3D" parent="Controllers" node_paths=PackedStringArray("main_camera")]
 script = ExtResource("3_8j4u8")
 main_camera = NodePath("../../CameraParent/Camera3D")
 tree_scene = ExtResource("4_fkjdr")
-Tools = [SubResource("Resource_orlig"), SubResource("Resource_v8c0r")]
+Tools = Array[ExtResource("6_t2mo5")]([SubResource("Resource_0h43g"), SubResource("Resource_orlig")])
+
+[node name="MoistureController" type="Node" parent="Controllers"]
+script = ExtResource("9_0h43g")
+_moisture_settings = ExtResource("10_orlig")
+metadata/_custom_type_script = "uid://g7kq51qkotr7"
 
 [node name="CameraParent" type="Node3D" parent="."]
 transform = Transform3D(-0.694658, 0, -0.71934, 0, 1, 0, 0.71934, 0, -0.694658, 0, 0, 1)
