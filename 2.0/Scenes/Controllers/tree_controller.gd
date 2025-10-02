@@ -9,6 +9,10 @@ var _spawn_check:float = SpawnUpdateRate
 
 func TreeSpawned(_Tree : ForrestTree) -> void:
 	_trees.append(_Tree)
+	_Tree.connect('tree_died',TreeDied)
+
+func TreeDied(_Tree : ForrestTree) -> void:
+	_trees.erase(_Tree)
 
 func _update_trees() -> void:
 	#iterate through all trees
@@ -17,6 +21,8 @@ func _update_trees() -> void:
 
 func _check_spawn_chance(_Tree : ForrestTree) -> bool:
 	var _spawn:bool = false
+	if not _Tree.CanSpawnTree:
+		return false
 	var _spawnChance: float = randf_range(0,1)
 	var _neighbors:Array[Tile] = _Tree.GetTreeNeighbors()
 	_spawn = _spawnChance < SpawnRates[_neighbors.size() - 1]

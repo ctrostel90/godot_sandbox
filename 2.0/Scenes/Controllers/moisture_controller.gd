@@ -1,8 +1,6 @@
 class_name MoistureController
 extends Node
 
-var _moisture_level:Array[float]
-
 @export var _moisture_settings:MoistureSettings
 var _update_check:float
 

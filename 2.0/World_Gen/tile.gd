@@ -11,6 +11,10 @@ var moisture_level: float = 0
 
 var debugLabel : Label3D
 
+func GetTree() -> Tree:
+	if HasTree:
+		return objects.get_child(0)
+	return null
 
 func SpawnTree(TreeScene:PackedScene) -> void:
 	if HasTree:
